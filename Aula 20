@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <string.h>
+
+// 1 & 2. Criando a estrutura Funcionario e utilizando typedef
+typedef struct {
+    char nome[50];
+    int idade;
+    float salario;
+} Funcionario;
+
+int main() {
+    // 3. Declarando as duas vari�veis solicitadas
+    Funcionario funcionario1, funcionario2;
+
+    // 4. Solicitando os dados do primeiro funcion�rio
+    printf("--- Cadastro do Funcionario 1 ---\n");
+    printf("Nome: ");
+    fgets(funcionario1.nome, sizeof(funcionario1.nome), stdin);
+    // Remove o caractere de nova linha (\n) deixado pelo fgets
+    funcionario1.nome[strcspn(funcionario1.nome, "\n")] = '\0';
+
+    printf("Idade: ");
+    scanf("%d", &funcionario1.idade);
+
+    printf("Salario (R$): ");
+    scanf("%f", &funcionario1.salario);
+
+    // Limpa o buffer do teclado para evitar problemas com o pr�ximo fgets
+    while (getchar() != '\n');
+
+    // Solicitando os dados do segundo funcion�rio
+    printf("\n--- Cadastro do Funcionario 2 ---\n");
+    printf("Nome: ");
+    fgets(funcionario2.nome, sizeof(funcionario2.nome), stdin);
+    funcionario2.nome[strcspn(funcionario2.nome, "\n")] = '\0';
+
+    printf("Idade: ");
+    scanf("%d", &funcionario2.idade);
+
+    printf("Salario (R$): ");
+    scanf("%f", &funcionario2.salario);
+
+    // 5. Apresentando os dados cadastrados
+    printf("\n========================================\n");
+    printf("          DADOS CADASTRADOS             \n");
+    printf("========================================\n");
+    printf("Funcionario 1:\n");
+    printf("  Nome: %s\n", funcionario1.nome);
+    printf("  Idade: %d anos\n", funcionario1.idade);
+    printf("  Salario: R$ %.2f\n", funcionario1.salario);
+
+    printf("\nFuncionario 2:\n");
+    printf("  Nome: %s\n", funcionario2.nome);
+    printf("  Idade: %d anos\n", funcionario2.idade);
+    printf("  Salario: R$ %.2f\n", funcionario2.salario);
+    printf("========================================\n");
+
+    // 6, 7 & 8. Analisando sal�rios, calculando diferen�a e tratando igualdade
+    printf("\n--- ANALISE COMPARATIVA DE SALARIOS ---\n");
+
+    if (funcionario1.salario > funcionario2.salario) {
+        float diferenca = funcionario1.salario - funcionario2.salario;
+        printf("O funcionario com maior salario e: %s\n", funcionario1.nome);
+        printf("Diferenca salarial: R$ %.2f\n", diferenca);
+    }
+    else if (funcionario2.salario > funcionario1.salario) {
+        float diferenca = funcionario2.salario - funcionario1.salario;
+        printf("O funcionario com maior salario e: %s\n", funcionario2.nome);
+        printf("Diferenca salarial: R$ %.2f\n", diferenca);
+    }
+    else {
+        printf("Ambos os funcionarios (%s e %s) recebem o mesmo salario exato: R$ %.2f\n",
+               funcionario1.nome, funcionario2.nome, funcionario1.salario);
+    }
+
+    return 0;
+}
