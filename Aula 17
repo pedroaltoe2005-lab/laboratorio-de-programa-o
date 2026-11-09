@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    // Declara��o das vari�veis
+    char nome[50];
+    char perfil[20];
+    char nomeConfirmacao[50];
+    char mensagem[150] = "Bem-vindo ao sistema, ";
+
+    // 1. Solicitar o primeiro nome do usu�rio
+    printf("Digite o primeiro nome do usuario: ");
+    scanf("%49s", nome);
+
+    // 2. Solicitar o perfil de acesso (ADMIN ou COMUM)
+    printf("Digite o perfil de acesso (ADMIN ou COMUM): ");
+    scanf("%19s", perfil);
+
+    // 3. Utilizar strlen() para informar a quantidade de caracteres do nome
+    int tamanhoNome = strlen(nome);
+
+    // 4. Utilizar strcmp() para identificar o perfil informado
+    int ehAdmin = strcmp(perfil, "ADMIN");
+    int ehComum = strcmp(perfil, "COMUM");
+
+    // 5. Utilizar strcpy() para copiar o nome para uma vari�vel de confirma��o
+    strcpy(nomeConfirmacao, nome);
+
+    // 6. Utilizar strcat() para montar uma mensagem de boas-vindas
+    strcat(mensagem, nomeConfirmacao);
+
+    // 7. Exibir os dados cadastrados e a mensagem final
+    printf("\n--- DADOS CADASTRADOS ---\n");
+    printf("Nome informado: %s\n", nome);
+    printf("Nome na confirmacao (via strcpy): %s\n", nomeConfirmacao);
+    printf("Quantidade de caracteres (via strlen): %d\n", tamanhoNome);
+
+    // Valida��o do perfil utilizando o resultado de strcmp()
+    if (ehAdmin == 0) {
+        printf("Perfil identificado: Administrador (ADMIN)\n");
+    } else if (ehComum == 0) {
+        printf("Perfil identificado: Usuario Comum (COMUM)\n");
+    } else {
+        printf("Perfil identificado: Perfil invalido\n");
+    }
+
+    // Exibi��o da mensagem final concatenada
+    printf("\n--- MENSAGEM FINAL ---\n");
+    printf("%s!\n", mensagem);
+
+    return 0;
+}
