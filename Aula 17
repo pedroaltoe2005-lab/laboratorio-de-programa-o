@@ -1,1 +1,160 @@
 
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    // Declara��o das vari�veis
+    char nome[50];
+    char perfil[20];
+    char nomeConfirmacao[50];
+    char mensagem[150] = "Bem-vindo ao sistema, ";
+
+    // 1. Solicitar o primeiro nome do usu�rio
+    printf("Digite o primeiro nome do usuario: ");
+    scanf("%49s", nome);
+
+    // 2. Solicitar o perfil de acesso (ADMIN ou COMUM)
+    printf("Digite o perfil de acesso (ADMIN ou COMUM): ");
+    scanf("%19s", perfil);
+
+    // 3. Utilizar strlen() para informar a quantidade de caracteres do nome
+    int tamanhoNome = strlen(nome);
+
+    // 4. Utilizar strcmp() para identificar o perfil informado
+    int ehAdmin = strcmp(perfil, "ADMIN");
+    int ehComum = strcmp(perfil, "COMUM");
+
+    // 5. Utilizar strcpy() para copiar o nome para uma vari�vel de confirma��o
+    strcpy(nomeConfirmacao, nome);
+
+    // 6. Utilizar strcat() para montar uma mensagem de boas-vindas
+    strcat(mensagem, nomeConfirmacao);
+
+    // 7. Exibir os dados cadastrados e a mensagem final
+    printf("\n--- DADOS CADASTRADOS ---\n");
+    printf("Nome informado: %s\n", nome);
+    printf("Nome na confirmacao (via strcpy): %s\n", nomeConfirmacao);
+    printf("Quantidade de caracteres (via strlen): %d\n", tamanhoNome);
+
+    // Valida��o do perfil utilizando o resultado de strcmp()
+    if (ehAdmin == 0) {
+        printf("Perfil identificado: Administrador (ADMIN)\n");
+    } else if (ehComum == 0) {
+        printf("Perfil identificado: Usuario Comum (COMUM)\n");
+    } else {
+        printf("Perfil identificado: Perfil invalido\n");
+    }
+
+    // Exibi��o da mensagem final concatenada
+    printf("\n--- MENSAGEM FINAL ---\n");
+    printf("%s!\n", mensagem);
+
+    return 0;
+}
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    // Declara��o das vari�veis
+    char nomeEstudante[50];
+    char codigoCurso[10];
+    char nomeArmazenado[50];
+    char mensagem[100] = "Ola, ";
+
+    // 1. Solicitar o primeiro nome do estudante
+    printf("Digite o primeiro nome do estudante: ");
+    scanf("%49s", nomeEstudante);
+
+    // 2. Solicitar o c�digo do curso (CC ou SI)
+    printf("Digite o codigo do curso (CC ou SI): ");
+    scanf("%9s", codigoCurso);
+
+    // 3. Utilizar strcmp() para identificar o curso
+    int ehCC = strcmp(codigoCurso, "CC");
+    int ehSI = strcmp(codigoCurso, "SI");
+
+    // 4. Utilizar strlen() para informar a quantidade de caracteres do nome
+    int tamanhoNome = strlen(nomeEstudante);
+
+    // 5. Utilizar strcpy() para armazenar o nome em outra vari�vel
+    strcpy(nomeArmazenado, nomeEstudante);
+
+    // 6. Utilizar strcat() para montar a mensagem "Ola, Nome!"
+    strcat(mensagem, nomeArmazenado);
+    strcat(mensagem, "!"); // Adiciona o ponto de exclama��o ao final
+
+    // 7. Exibir o nome do estudante, o curso e a mensagem
+    printf("\n--- DADOS DO ESTUDANTE E CURSO ---\n");
+    printf("Nome do estudante: %s\n", nomeEstudante);
+    printf("Nome armazenado em outra variavel (via strcpy): %s\n", nomeArmazenado);
+    printf("Quantidade de caracteres do nome (via strlen): %d\n", tamanhoNome);
+
+    // Valida��o do curso utilizando o resultado de strcmp()
+    if (ehCC == 0) {
+        printf("Curso identificado: Ciencia da Computacao (CC)\n");
+    } else if (ehSI == 0) {
+        printf("Curso identificado: Sistemas de Informacao (SI)\n");
+    } else {
+        printf("Curso identificado: Codigo de curso invalido\n");
+    }
+
+    // Exibi��o da mensagem final concatenada
+    printf("\n--- MENSAGEM PERSONALIZADA ---\n");
+    printf("%s\n", mensagem);
+
+    return 0;
+}
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    // Declara��o das vari�veis
+    char nomeProduto[50];
+    char categoria[30];
+    char produtoCopia[50];
+    char descricao[100] = "Produto: ";
+
+    // 1. Solicitar o nome de um produto
+    printf("Digite o nome do produto: ");
+    scanf(" %49[^\n]", nomeProduto); // L� strings com espa�os, se houver
+
+    // 2. Solicitar sua categoria (HARDWARE ou PERIFERICO)
+    printf("Digite a categoria (HARDWARE ou PERIFERICO): ");
+    scanf("%29s", categoria);
+
+    // 3. Utilizar strlen() para verificar a quantidade de caracteres do nome
+    int tamanhoNome = strlen(nomeProduto);
+
+    // 4. Utilizar strcmp() para identificar a categoria
+    int ehHardware = strcmp(categoria, "HARDWARE");
+    int ehPeriferico = strcmp(categoria, "PERIFERICO");
+
+    // 5. Utilizar strcpy() para copiar o nome do produto para outra vari�vel
+    strcpy(produtoCopia, nomeProduto);
+
+    // 6. Utilizar strcat() para gerar uma descri��o no formato "Produto: Nome"
+    strcat(descricao, produtoCopia);
+
+    // 7. Exibir um resumo do cadastro
+    printf("\n--- RESUMO DO CADASTRO DE ESTOQUE ---\n");
+    printf("Nome original do produto: %s\n", nomeProduto);
+    printf("Nome copiado (via strcpy): %s\n", produtoCopia);
+    printf("Quantidade de caracteres do nome (via strlen): %d\n", tamanhoNome);
+
+    // Exibi��o da categoria validada por strcmp()
+    if (ehHardware == 0) {
+        printf("Categoria identificada: Hardware\n");
+    } else if (ehPeriferico == 0) {
+        printf("Categoria identificada: Perif�rico\n");
+    } else {
+        printf("Categoria identificada: Categoria desconhecida/inv�lida\n");
+    }
+
+    // Exibi��o da descri��o final concatenada
+    printf("\n--- IDENTIFICACAO NO ESTOQUE ---\n");
+    printf("%s\n", descricao);
+
+    return 0;
+}
