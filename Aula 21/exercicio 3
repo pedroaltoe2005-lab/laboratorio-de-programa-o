@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct { 
+    char nome[50]; 
+    float salario; 
+    int horasExtras; 
+} Funcionario;
+
+int main() {
+    Funcionario func[5];
+    FILE *arquivo;
+    int i, qtd;
+
+    printf("Quantos funcionarios deseja cadastrar (ate 5)? ");
+    scanf("%d", &qtd);
+    
+    if (qtd > 5) {
+        qtd = 5;
+    }
+    if (qtd < 1) {
+        return 0;
+    }
+
+    for (i = 0; i < qtd; i++) {
+        printf("\n--- Funcionario %d ---\n", i + 1);
+        
+        getchar(); 
+
+        printf("Digite o nome: ");
+        fgets(func[i].nome, sizeof(func[i].nome), stdin);
+        func[i].nome[strcspn(func[i].nome, "\n")] = '\0';
+
+        printf("Digite o salario: ");
+        scanf("%f", &func[i].salario);
+
+        printf("Digite as horas extras: ");
+        scanf("%d", &func[i].horasExtras);
+    }
+
+    arquivo = fopen("funcionarios.txt", "a");
+    if (arquivo == NULL) {
+        printf("\nErro ao abrir o arquivo para gravacao!\n");
+        return 1;
+    }
+
+    for (i = 0; i < qtd; i++) {
+        fprintf(arquivo, "Nome: %s | Salario: %.2f | Horas Extras: %d\n", 
+                func[i].nome, func[i].salario, func[i].horasExtras);
+    }
+
+    fclose(arquivo);
+
+    printf("\nDados gravados com sucesso! Lendo o arquivo...\n\n");
+
+    arquivo = fopen("funcionarios.txt", "r");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo para leitura!\n");
+        return 1;
+    }
+
+    printf("=== Funcionarios Cadastrados (Arquivo) ===\n");
+    char linha[200];
+    while (fgets(linha, sizeof(linha), arquivo) != NULL) {
+        printf("%s", linha);
+    }
+
+    fclose(arquivo);
+
+    return 0;
+}
