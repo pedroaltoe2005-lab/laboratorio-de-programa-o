@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int numeros[5];
+    int lido;
+    FILE *arquivo;
+    int i;
+
+    printf("=== Digite 5 numeros inteiros ===\n");
+    for (i = 0; i < 5; i++) {
+        printf("Numero %d: ", i + 1);
+        scanf("%d", &numeros[i]);
+    }
+
+    arquivo = fopen("numeros.txt", "w");
+    if (arquivo == NULL) {
+        printf("\nErro ao abrir o arquivo para gravacao!\n");
+        return 1;
+    }
+
+    for (i = 0; i < 5; i++) {
+        fprintf(arquivo, "%d\n", numeros[i]);
+    }
+
+    fclose(arquivo);
+
+    printf("\nDados gravados com sucesso! Lendo o arquivo...\n\n");
+
+    arquivo = fopen("numeros.txt", "r");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo para leitura!\n");
+        return 1;
+    }
+
+    printf("=== Numeros armazenados no arquivo 'numeros.txt' ===\n");
+    while (fscanf(arquivo, "%d", &lido) == 1) {
+        printf("%d\n", lido);
+    }
+
+    fclose(arquivo);
+
+    return 0;
+}
