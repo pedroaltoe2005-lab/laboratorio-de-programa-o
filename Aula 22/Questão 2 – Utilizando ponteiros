@@ -1,0 +1,12 @@
+#include <stdio.h>
+
+int main() {
+    int valor = 20;
+    int *ponteiro = &valor;
+
+    printf("Valor da variavel: %d\n", valor);
+    printf("Endereco de memoria: %p\n", (void*)ponteiro);
+    printf("Valor acessado pelo ponteiro: %d\n", *ponteiro);
+
+    return 0;
+}
